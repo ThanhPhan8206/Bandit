@@ -3,7 +3,7 @@
 
 
 ## Day01
-### 🔹 Level 0
+### # Level 0
 **1. Lệnh thực hiện:**
 ```bash
 # Cách 1 (Phổ biến):
@@ -12,8 +12,39 @@ ssh bandit0@bandit.labs.overthewire.org -p 2220
 # Cách 2 (Dùng cờ -l để đẩy tên user ra sau):
 ssh bandit.labs.overthewire.org -p 2220 -l bandit0
 ```
-**2. Kết quả thực thi:**<br>
+**2. Kết quả thực thi:**<br><br>
 <img width="657" height="286" alt="image" src="https://github.com/user-attachments/assets/a7999478-4385-47c7-a743-9131c6d4aa02" />
 <br>
 
-### 🔹 Level 0 -> Level 1
+### # Level 0 -> Level 1
+**1. Lệnh thực hiện:**
+```bash
+ls          # Hiển thị danh sách các file và thư mục hiện có
+cat readme  # Đọc và in nội dung của file readme ra màn hình
+```
+**2. Kết quả thực thi:**<br><br>
+<img width="692" height="177" alt="image" src="https://github.com/user-attachments/assets/edb4aee2-0a58-45bc-9441-6f01d32eaeb9" />
+<br>
+> 🔑 **KEY:** `6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR`
+<br>
+
+### # Level 1 -> Level 2
+**1. Lệnh thực hiện:**<br>
+```bash
+Dùng mật khẩu ở level trước để đăng nhập: `6y2kwnwK6grgvwvpvLaa2T1cpFEKOhNR`
+```
+<img width="590" height="237" alt="image" src="https://github.com/user-attachments/assets/105d9df3-5bba-4d93-899d-34449ed1018a" /><br>
+```bash
+cat ./-   # Đọc file có tên là "-" bằng đường dẫn tương đối (./) để tránh hệ thống hiểu nhầm "-" là tham số (stdin)
+```
+**2. Kết quả thực thi:**<br><br>
+<img width="326" height="103" alt="image" src="https://github.com/user-attachments/assets/bc8e3c30-c566-4679-96cf-c695c27f0b6d" />
+<br>
+> 🔑 **KEY:** `PK8fYLZg2hnHSz83plBL1iEPKdD3QToB`
+<br>
+
+
+
+
+
+
