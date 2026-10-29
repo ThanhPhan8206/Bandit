@@ -54,6 +54,8 @@ cat ./"--spaces in this filename--"
 > 🔑 **KEY:** `7ZZ2LFrykP2zEyvBl4m3clcL7tGYJPME`
 <br>
 
+## Day02
+
 ### # Level 3 -> Level 4
 **1. Lệnh thực hiện:**<br>
 ```bash
@@ -69,6 +71,105 @@ cat ...Hiding-From-You    # Đọc nội dung file ẩn để lấy mật khẩu
 >
 > 🔑 **KEY:** `xzTXq1rDJQVVAzdv5cHq1TQytTWufAMq`
 <br>
+
+### # Level 4 -> Level 5
+
+**1. Lệnh thực hiện:**<br>
+```bash
+cd inhere             # Di chuyển vào thư mục "inhere"
+ls -la                # Kiểm tra danh sách các file hiện có trong thư mục
+strings -f ./-file0*  # Trích xuất các chuỗi văn bản đọc được từ tất cả các file bắt đầu bằng "-file0" kèm tên file (-f)
+```
+
+**2. Kết quả thực thi:**<br><br>
+
+<img width="543" height="497" alt="image" src="https://github.com/user-attachments/assets/d9b7859a-2fe1-4a6c-b407-21d5bf14b6a0" />
+
+<br>
+
+> **💡 Note (Kiến thức mới):**
+> * **Ký tự đại diện `*` (Wildcard):** Đại diện cho một chuỗi ký tự bất kỳ (từ 0 đến nhiều ký tự). Khi viết `./-file0*`, hệ thống sẽ tự động khớp và thao tác cùng lúc trên tất cả các file có phần đầu là `-file0` (`-file00` đến `-file09`).
+> * **Lệnh `strings`:** Quét và trích xuất các chuỗi ký tự đọc được (ASCII/UTF-8, mặc định dài từ 4 ký tự trở lên) ra thành từng dòng riêng biệt, đồng thời loại bỏ hoàn toàn dữ liệu nhị phân (binary) gây lỗi hiển thị. Kết hợp thêm cờ `-f` giúp in kèm tên file ở đầu mỗi dòng kết quả để biết chuỗi mật khẩu nằm ở file nào.
+> 
+> 🔑 **KEY:** `6C7h9GD8M6ai5nr7wo1RonrzFjj9yIrG`
+
+<br>
+
+### # Level 5 -> Level 6
+
+**1. Lệnh thực hiện:**<br>
+```bash
+cd inhere                                  # Di chuyển vào thư mục "inhere"
+find . -type f -size 1033c ! -executable   # Tìm file thường (-type f), nặng 1033 bytes (-size 1033c) và không có quyền thực thi (! -executable)
+cat ./maybehere07/.file2                   # Đọc nội dung file tìm được để lấy mật khẩu
+```
+
+**2. Kết quả thực thi:**<br><br>
+
+<img width="532" height="598" alt="image" src="https://github.com/user-attachments/assets/da271b2d-fbab-4419-aa19-d929a44af516" />
+
+
+<br>
+
+> **💡 Note (Kiến thức mới - Lệnh `find`):**
+> * **Cú pháp cốt lõi:** `find <phạm_vi_tìm> <các_điều_kiện_lọc>`
+>   * Dấu `.` ngay sau `find` chỉ định phạm vi tìm kiếm bắt đầu từ **thư mục hiện tại** và đệ quy (quét sâu) xuống toàn bộ các thư mục con bên trong. (Nếu thay bằng `/` sẽ tìm trên toàn bộ hệ thống).
+>   * Khi viết nhiều điều kiện liền nhau, `find` mặc định hiểu là toán tử **AND** (file phải thỏa mãn đồng thời tất cả các điều kiện).
+> * **Giải nghĩa các cờ lọc thuộc tính (Flags) quan trọng:**
+>   * **`-type <loại>` (Phân loại đối tượng):** Dùng `-type f` để chỉ lọc **file thông thường** (*regular file*), hoặc `-type d` nếu muốn lọc **thư mục** (*directory*).
+>   * **`-size <số><đơn_vị>` (Kích thước):** Lọc theo dung lượng file. Trong đó hậu tố đơn vị gồm: **`c`** (*bytes*), **`k`** (*Kilobytes*), **`M`** (*Megabytes*), **`G`** (*Gigabytes*).
+>     * Viết `1033c`: Chính xác bằng 1033 bytes.
+>     * Viết `+1033c` hoặc `-1033c`: Lớn hơn (`+`) hoặc nhỏ hơn (`-`) 1033 bytes.
+>   * **`-readable` / `-executable` (Quyền hạn):** Kiểm tra file có đọc được (*readable*) hoặc có quyền chạy thực thi (*executable*) hay không.
+>   * **Toán tử phủ định `!` (hoặc `-not`):** Đặt dấu `!` (có khoảng trắng phía sau) trước bất kỳ cờ nào để đảo ngược điều kiện. Cụm `! -executable` nghĩa là chỉ lấy những file **KHÔNG** có quyền thực thi.
+> 
+> 🔑 **KEY:** `pXa26xhMWaC2SvDotA4r9EgZkulOeSBW`
+<br>
+
+### # Level 6 -> Level 7
+
+**1. Lệnh thực hiện:**<br>
+```bash
+find / -group bandit6 -user bandit7 -size 33c 2>/dev/null   # Tìm trên toàn hệ thống (/) file thuộc group bandit6, user bandit7, nặng 33 bytes và ẩn lỗi
+cat /var/lib/dpkg/info/bandit7.password                     # Đọc nội dung file tìm được để lấy mật khẩu
+```
+
+**2. Kết quả thực thi:**<br><br>
+
+<img width="607" height="86" alt="image" src="https://github.com/user-attachments/assets/7feb50c6-f588-443e-8624-3f89ac779a64" />
+
+
+<br>
+
+> **💡 Note (Kiến thức mới):**
+> * **Tìm kiếm toàn hệ thống (`find /`):** Thay dấu `.` (thư mục hiện tại) bằng dấu `/` (thư mục gốc - root directory) để quét toàn bộ các file trên máy chủ.
+> * **Lọc theo chủ sở hữu và nhóm:**
+>   * **`-user <tên_user>`:** Lọc các file thuộc quyền sở hữu của người dùng chỉ định (`bandit7`).
+>   * **`-group <tên_group>`:** Lọc các file thuộc quyền quản lý của nhóm chỉ định (`bandit6`).
+> * **Kỹ thuật ẩn thông báo lỗi `2>/dev/null`:** Khi quét toàn bộ hệ thống (`/`), user thường sẽ bị từ chối quyền truy cập ở nhiều thư mục hệ thống và sinh ra hàng loạt lỗi `Permission denied`. Trong Linux, `2` là luồng lỗi chuẩn (*stderr*), toán tử `>` dùng để chuyển hướng đầu ra, và `/dev/null` là một thiết bị ảo dùng để hủy dữ liệu. Cụm `2>/dev/null` giúp loại bỏ toàn bộ các dòng báo lỗi để chỉ hiển thị đường dẫn file cần tìm.
+> 
+> 🔑 **KEY:** `Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
