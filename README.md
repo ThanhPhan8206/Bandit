@@ -150,11 +150,97 @@ cat /var/lib/dpkg/info/bandit7.password                     # Đọc nội dung 
 > 
 > 🔑 **KEY:** `Bmnnvf82KzQlfxgAI2d1zYbr1u9pr3E3`
 
+<br>
+
+## Day03
+
+### # Level 7 -> Level 8
+
+**1. Lệnh thực hiện:**<br>
+```bash
+ls                          # Kiểm tra danh sách các file hiện có trong thư mục
+grep "millionth" data.txt   # Tìm và in ra dòng có chứa từ khóa "millionth" bên trong file data.txt
+```
+
+**2. Kết quả thực thi:**<br><br>
+
+<img width="483" height="157" alt="image" src="https://github.com/user-attachments/assets/36970c1c-99d6-458f-bf2a-7bac2a37c089" />
 
 
+<br>
+
+> **💡 Note (Kiến thức mới):**
+> * **Lệnh `grep` (`grep "<từ_khóa>" <file>`):** Lọc và trích xuất đúng những dòng chứa chuỗi ký tự cần tìm **bên trong nội dung file** (phân biệt với `find` dùng để tìm vị trí file ngoài hệ thống).
+> * **Các cờ mở rộng hay dùng:** `-i` (không phân biệt chữ hoa/thường), `-n` (in kèm số thứ tự dòng), `-v` (chỉ in những dòng **không** chứa từ khóa).
+> 
+> 🔑 **KEY:** `VR1ljMayciFxbnUokuQmJFw6QC9VKtub`
+
+<br>
+
+### # Level 8 -> Level 9
+
+**1. Lệnh thực hiện:**<br>
+```bash
+ls                        # Kiểm tra danh sách các file hiện có trong thư mục
+sort data.txt | uniq -u   # Sắp xếp các dòng trong data.txt rồi lọc ra dòng duy nhất không bị trùng lặp (-u)
+```
+
+**2. Kết quả thực thi:**<br><br>
+
+<img width="401" height="165" alt="image" src="https://github.com/user-attachments/assets/128f3f4e-03ae-4120-b079-95aa1d016dbe" />
+
+<br>
+
+> **💡 Note (Kiến thức mới):**
+> * **Toán tử Pipe (`|`):** Truyền trực tiếp kết quả đầu ra (*stdout*) của lệnh đứng trước (`sort`) làm dữ liệu đầu vào (*stdin*) cho lệnh đứng sau (`uniq`).
+> * **Combo `sort` + `uniq`:** Lệnh `uniq` chỉ nhận diện và xử lý được các dòng trùng lặp khi chúng **nằm ngay sát cạnh nhau**. Do đó, luôn phải dùng `sort` để gom các dòng giống nhau về liền kề trước, sau đó dùng `uniq -u` (*unique*) để trích xuất dòng duy nhất chỉ xuất hiện 1 lần (hoặc dùng `uniq -c` để đếm số lần xuất hiện, `uniq -d` để in các dòng bị trùng).
+> 
+> 🔑 **KEY:** `EjmOSvuAu7sGAHqHVcBDPirRe9T03kxl`
+
+<br>
 
 
+### # Level 9 -> Level 10
 
+**1. Lệnh thực hiện:**<br>
+```bash
+strings -f data.txt | grep "=="   # Trích xuất các chuỗi đọc được từ file nhị phân data.txt rồi lọc các dòng có dấu "=="
+```
+
+**2. Kết quả thực thi:**<br><br>
+
+<img width="462" height="130" alt="image" src="https://github.com/user-attachments/assets/53ad29a2-f6cd-4e5d-afcd-d05ef44760eb" />
+
+<br>
+
+> **💡 Note (Kiến thức tổng hợp):**
+> * **Combo `strings` + `grep`:** Kỹ thuật kinh điển trong CTF khi xử lý file nhị phân (binary). Dùng `strings` để lọc bỏ toàn bộ mã máy rác, chỉ giữ lại các chuỗi ký tự ASCII con người đọc được, sau đó truyền qua ống dẫn `|` vào `grep "=="` để bắt chính xác các dòng chứa dấu hiệu nhận biết của mật khẩu.
+> 
+> 🔑 **KEY:** `B0s2khmbT9u0geKuOoVGW3JZKhndE3BG`
+
+
+<br>
+
+### # Level 10 -> Level 11
+
+**1. Lệnh thực hiện:**<br>
+```bash
+ls                  # Kiểm tra danh sách các file hiện có trong thư mục
+cat data.txt        # Xem nội dung file data.txt (phát hiện chuỗi mã hóa Base64 kết thúc bằng dấu "==")
+base64 -d data.txt  # Giải mã (decode) nội dung Base64 trong file data.txt về văn bản gốc
+```
+
+**2. Kết quả thực thi:**<br><br>
+
+<img width="586" height="198" alt="image" src="https://github.com/user-attachments/assets/b7953ec7-8613-4c86-a30d-d127c4a78a0c" />
+
+<br>
+
+> **💡 Note (Kiến thức mới):**
+> * **Định dạng Base64:** Chuỗi mã hóa gồm chữ cái (`A-Z`, `a-z`), số (`0-9`), dấu `+`, `/` và thường có dấu `=` hoặc `==` ở cuối để đệm độ dài (*padding*).
+> * **Lệnh `base64`:** Công cụ mã hóa và giải mã Base64 trực tiếp trên Linux. Mặc định `base64 <file>` dùng để mã hóa (*encode*), thêm cờ **`-d`** (hoặc `--decode`) để giải mã ngược về văn bản gốc.
+> 
+> 🔑 **KEY:** `pYfOY6HwUsDj5rL9UvyhU7MCmv8vN5Ro`
 
 
 
